@@ -87,7 +87,6 @@ def plot_trials(csv):
 	data['epsilon'] = data['parameters'].apply(lambda x: ast.literal_eval(x)['e']) 
 	data['alpha'] = data['parameters'].apply(lambda x: ast.literal_eval(x)['a']) 
 
-
 	# Create training and testing subsets
 	training_data = data[data['testing'] == False]
 	testing_data = data[data['testing'] == True]
