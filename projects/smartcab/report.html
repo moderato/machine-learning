@@ -13693,7 +13693,7 @@ SpIkSZIkSS33f8mM8d5orHk+AAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>The waypoint feature is the most relevant to both safety and efficiency, while all the others are relavant to one of them, i.e. "light", "left", "right" and "oncoming" to safety, and "deadline" to efficiency. I'll choose "waypoint", "light", "oncoming", and "left" to construct the states. The reason I don't use "deadline" is that it will encourage the cab to take dangerous actions when the deadline is shortly ahead, meanwhile it greatly expands the state space. "right" is also not included into the states, since no matter what value "right" has, this part of traffic will not conflict with the cab.</p>
+<p>All features are relavant to one of safety and efficiency, i.e. "light", "left", "right" and "oncoming" to safety, and "waypoint" and "deadline" to efficiency. I'll choose "waypoint", "light", "oncoming", and "left" to construct the states. The reason I don't use "deadline" is that it will encourage the cab to take dangerous actions when the deadline is shortly ahead, meanwhile it greatly expands the state space. "right" is also not included into the states, since no matter what value "right" has, this part of traffic will not conflict with the cab.</p>
 
 </div>
 </div>
@@ -19037,7 +19037,7 @@ zMys6/4/T1PZRmdBtM0AAAAASUVORK5CYII=
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>An example to the optimal policy would be the second state record in the txt file. When state("waypoint", "light", "oncoming", "left") = ('right', 'green', 'forward', 'right'), the Q values for all the four valid actions are forward : 0.00, right : 0.12, None : -0.02, left : -0.10. The cab would choose the action with highest Q value (right), which is also consistent with the next_waypoint.</p>
-<p>An example to the sub-optimal policy would be the fourteenth state record in the txt file. When state("waypoint", "light", "oncoming", "left") = ('right', 'red', 'right', 'left'), the Q values for all the four valid actions are forward : -0.08, right : 0.11, None : 0.01, left : -0.24. Although the actual action with highest Q value is consistent with the next_waypoint, the cab moves when the light is red, which is illegal in most of the places in the world. Therefore turning right is a sub-optimal policy.</p>
+<p>An example to the sub-optimal policy would be somewhere in the middle of the txt file. When state("waypoint", "light", "oncoming", "left") = ('right', 'red', None, None), the Q values for all the four valid actions are forward : -2.70, right : 0.36, None : 1.62, left : -2.86. The next_waypoint suggest the cab turn right, which is actually the optimal policy in this position. However, based on the Q values it learnt, the cab will remain still here, which is a sub-optimal policy.</p>
 
 </div>
 </div>
