@@ -65,7 +65,7 @@ class LearningAgent(Agent):
         ###########
         # Set 'state' as a tuple of relevant data for the agent        
         # state = (waypoint, inputs['light'], inputs['right'], inputs['left'], inputs['oncoming'], deadline)
-        state = (waypoint, inputs['light'], inputs['oncoming'], inputs['left'], inputs['right'])
+        state = (waypoint, inputs['light'], inputs['oncoming'], inputs['left'])
 
         return state
 
@@ -83,7 +83,7 @@ class LearningAgent(Agent):
         if state in self.Q.keys():
             maxQ = max(self.Q[state].values())
 
-        return maxQ 
+        return maxQ
 
 
     def createQ(self, state):
@@ -95,7 +95,7 @@ class LearningAgent(Agent):
         # When learning, check if the 'state' is not in the Q-table
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
-        if state not in self.Q.keys():
+        if self.learning and state not in self.Q.keys():
         	tmpDict = dict()
         	for action in self.valid_actions:
         		tmpDict[action] = 0.0
