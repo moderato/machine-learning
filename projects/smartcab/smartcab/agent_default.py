@@ -65,7 +65,7 @@ class LearningAgent(Agent):
         ###########
         # Set 'state' as a tuple of relevant data for the agent        
         # state = (waypoint, inputs['light'], inputs['right'], inputs['left'], inputs['oncoming'], deadline)
-        state = (waypoint, inputs['light'], inputs['oncoming'], deadline)
+        state = (waypoint, inputs['light'], inputs['oncoming'], inputs['left'], inputs['right'])
 
         return state
 
@@ -81,8 +81,7 @@ class LearningAgent(Agent):
 
         maxQ = None
         if state in self.Q.keys():
-        	for action in self.Q[state].keys():
-        		maxQ = maxQ if maxQ > self.Q[state][action] else self.Q[state][action]
+            maxQ = max(self.Q[state].values())
 
         return maxQ 
 
@@ -121,19 +120,14 @@ class LearningAgent(Agent):
         # When learning, choose a random action with 'epsilon' probability
         #   Otherwise, choose an action with the highest Q-value for the current state
         if self.learning:
-        	prob = random.uniform(0, 1)
-        	if(prob < self.epsilon):
-        		action = random.choice(self.valid_actions)
-        	elif state in self.Q.keys():
-        		tmpQ = 0.0
-        		for a, q in self.Q[state].iteritems():
-        			if q > tmpQ:
-        				action = a
-        				tmpQ = q
-        				print tmpQ
+            prob = random.uniform(0, 1)
+            if(prob < self.epsilon):
+                action = random.choice(self.valid_actions)
+            elif state in self.Q.keys():
+                valid = [k for k, v in self.Q[state].iteritems() if v == max(self.Q[state].values())]
+                action = random.choice(valid)
         else:
-        	action = random.choice(self.valid_actions)
- 
+            action = random.choice(self.valid_actions)
         return action
 
 
